@@ -429,6 +429,7 @@
     background: var(--teal-lt); border-radius: 3px; padding: 0.22rem 0.5rem; margin-bottom: 0.9rem;
   }
   .js .course-family.is-collapsed .course-extra { display: none; }
+  .course-card[id] { scroll-margin-top: 80px; }
   .course-more-wrap { display: none; margin-top: 1.5rem; }
   .js .course-more-wrap { display: block; }
   .course-more {
@@ -755,7 +756,7 @@
           <a href="contact.html" class="text-link">Outlines and training material available upon request →</a>
         </div>
       </article>
-      <article class="course-card course-extra reveal">
+      <article class="course-card course-extra reveal" id="train-the-trainer">
         <h3 class="course-title">Internal Experts: Training the Trainer</h3>
         <p class="course-promise">Turn your internal experts into leaders, with training skills that set them apart.</p>
         <div class="course-label">Who it's for</div>
@@ -969,6 +970,22 @@ document.querySelectorAll('.course-more').forEach(btn => {
     if (!open) sec.scrollIntoView({ behavior: 'smooth' });
   });
 });
+// A link straight to one course (e.g. courses.html#train-the-trainer) opens its family and shows the card
+function openLinkedCourse() {
+  var id = location.hash.slice(1);
+  var card = id && document.getElementById(id);
+  if (!card || !card.classList.contains('course-card')) return;
+  var sec = card.closest('.course-family');
+  if (sec && sec.classList.contains('is-collapsed')) {
+    sec.classList.remove('is-collapsed');
+    var btn = sec.querySelector('.course-more');
+    if (btn) { btn.setAttribute('aria-expanded', 'true'); btn.textContent = btn.dataset.less; }
+  }
+  card.classList.add('in');
+  card.scrollIntoView();
+}
+openLinkedCourse();
+window.addEventListener('hashchange', openLinkedCourse);
 </script>
 <script>
 (function () {
