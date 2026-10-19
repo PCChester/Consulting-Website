@@ -37,8 +37,8 @@ or online.
 ## Running locally
 
 ```bash
-git clone https://github.com/PCChester/Portfolio-Website.git
-cd Portfolio-Website
+git clone https://github.com/PCChester/Consulting-Website.git
+cd Consulting-Website
 # open index.html in a browser
 ```
 
